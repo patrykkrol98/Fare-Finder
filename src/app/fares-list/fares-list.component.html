@@ -1,0 +1,60 @@
+<form class="form-container" [formGroup]="fareForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Max price</mat-label>
+    <input formControlName="priceValueTo" matInput type="number" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Select departure airport</mat-label>
+    <mat-select formControlName="departureAirportIataCode">
+      <mat-option value="KRK">KRK</mat-option>
+      <mat-option value="WMI">WMI</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="dateFrom"
+      formControlName="outboundDepartureDateFrom"
+    />
+    <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
+    <mat-datepicker #dateFrom></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="dateTo"
+      formControlName="outboundDepartureDateTo"
+    />
+    <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
+    <mat-datepicker #dateTo></mat-datepicker>
+  </mat-form-field>
+  <button type="submit" [disabled]="!fareForm.valid">
+    Submit
+  </button>
+</form>
+<br>
+<div class="cards-container">
+  <div *ngFor="let fare of fares">
+    <mat-card class="fare-card">
+      <mat-card-header>
+        <div mat-card-avatar class="fare-header-image"></div>
+        <mat-card-title>
+          {{ fare.destinationCity }}</mat-card-title>
+        <mat-card-subtitle
+          >{{ fare.destinationCountry }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img class="fareCardImg"
+        mat-card-image
+        [src]="getImageUrl(fare.iataCode)"
+      />
+      <mat-card-content>
+        <p>
+          {{ fare.arrivalDate| date }}
+          {{ fare.price}}
+          {{ fare.currencySymbol }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
