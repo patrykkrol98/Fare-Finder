@@ -9,7 +9,9 @@ import { Fare } from '../models/fare.model';
   providedIn: 'root'
 })
 export class FaresService {
+  faresUrl = "https://www.ryanair.com/api/farfnd/3/oneWayFares";
   proxyServer = 'https://cors-anywhere.herokuapp.com/';
+
 
   constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
@@ -52,7 +54,7 @@ export class FaresService {
   }
 
   getFaresImages() {
-    return this.http.get<any>(environment.imagesUrl + this.proxyServer).pipe(
+    return this.http.get<any>(this.proxyServer + environment.imagesUrl ).pipe(
       map(response => response.destinationInformation))
   }
 }
