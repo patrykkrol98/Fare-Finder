@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  imagesUrl: "https://www.ryanair.com/de/de.farefinder.json",
+  faresUrl: "https://www.ryanair.com/api/farfnd/3"
 };
 
 /*
